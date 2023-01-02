@@ -14,6 +14,7 @@ XXX with the distribution name of your linux.
 in order to check whether `dialog` has been installed on your
 system, you can try command `dialog --version`. if the
 command has a reasonable output beside "command not found",
+`dialog` will have been installed.
 
 ## startup demo
 
