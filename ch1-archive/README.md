@@ -3,7 +3,7 @@ Author: `ggn_2015`
 Date  : 2023-01-02
 
 this lab shows how to create an `archive file(.a)` in linux,
-as well as how to link it.
+as well as how to link with it.
 
 ## startup a demo
 steps to follow:
