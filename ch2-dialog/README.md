@@ -36,7 +36,8 @@ follow these steps:
 
 1. use `source` or `.` command to include `my_dialog.sh`
 into `foo.sh`
-2. call the function you want and redirect stderr into a tmpfile
+2. call the function you want and redirect stderr into a temporary
+file
 3. get the return value of the function
 4. judge according to the content of tmpfile and the return value
 
