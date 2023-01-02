@@ -3,11 +3,13 @@
 # this file contains many functions about the usage of `dialog`
 # make sure that your system has been equiped with command
 # `dialog` before you try these functions.
+#
+#
 
 DEFAULT_WIDTH=54
 DEFAULT_HEIGHT=18
 
-# `dialog_msgbox` will show a message box in the terminal
+# dialog_msgbox will show a message box in the terminal
 # with an <OK> button.
 #
 # usage: 
@@ -23,6 +25,8 @@ DEFAULT_HEIGHT=18
 #         0 (true);
 #     if dialog terminated by interruption, the return
 #         value is 1 (false).
+#
+#
 dialog_msgbox() {
 	local TITLE=$1
 	local PROMPT=$2
@@ -54,6 +58,8 @@ dialog_msgbox() {
 #         and the selected set will be output to stderr (2)
 #     if Cancel is pushed, the function return 123 (false)
 #         and will not output to stderr
+#
+#
 dialog_checklist() {
 	local TITLE=$1
 	local PROMPT=$2
@@ -105,6 +111,8 @@ dialog_checklist() {
 #         and the selected id will be output to stderr (2)
 #     if Cancel button is pushed, return 123 (false)
 #         and nothing will be output to stderr
+#
+#
 dialog_menu() {
 	local TITLE=$1
 	local PROMPT=$2
@@ -146,4 +154,5 @@ dialog_menu() {
 #     dialog_checklist "title" "prompt" 4 "one" "two" "three" "four"
 #     dialog_menu "game menu" "select an option" 4 "new" "load" "settings" "quit"
 #     echo ans=$?
-
+#
+#

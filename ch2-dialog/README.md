@@ -44,3 +44,13 @@ the usage of these three functions are described in detail in
 the comment of `my_dialog.sh`, and `my_dialog_test.sh` presents 
 a usage demo for each of the functions.
 
+if you want to generate a manual from the comment of `my_dialog.sh`,
+we suggest you to use this command under current folder:
+
+```bash
+grep "^#" my_dialog.sh | grep -v "^#!" | more
+```
+
+and the output of the command below descibes the usage/return value/
+some other tips of the three functions.
+
