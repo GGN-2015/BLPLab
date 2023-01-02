@@ -39,14 +39,15 @@ into `foo.sh`
 2. call the function you want and redirect stderr into a temporary
 file
 3. get the return value of the function
-4. judge according to the content of tmpfile and the return value
+4. judge(e.g. case clause) according to the content of temporary file 
+and the return value
 
 the usage of these three functions are described in detail in 
 the comment of `my_dialog.sh`, and `my_dialog_test.sh` presents 
 a usage demo for each of the functions.
 
 if you want to generate a manual from the comment of `my_dialog.sh`,
-we suggest you to use this command under current folder:
+we suggest you use this command under current folder:
 
 ```bash
 grep "^#" my_dialog.sh | grep -v "^#!" | more
@@ -54,4 +55,20 @@ grep "^#" my_dialog.sh | grep -v "^#!" | more
 
 and the output of the command below descibes the usage/return value/
 some other tips of the three functions.
+
+## about `gdialog`
+
+the usage of `gdialog` is very similar to that of `dialog`.
+if your system support gnorm and gdialog, you can use the following
+command to switch all the `dialog` used in `my_dialog.sh` into
+`gdialog`. input this command before `./my_dialog_test.sh` is 
+called:
+
+```bash
+export DIALOG=gdialog
+```
+
+the value of environment variable DIALOG must be `dialog` or `gdialog`
+(or empty or undefined by default), or else the dialog encapsulations 
+are not warranted to be correct.
 

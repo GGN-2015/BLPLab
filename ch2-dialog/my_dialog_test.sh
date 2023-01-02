@@ -28,3 +28,4 @@ echo return=$?
 menu=$(cat $tmpfile)
 echo menu=$menu
 pause
+

@@ -6,6 +6,8 @@
 #
 #
 
+DIALOG=${DIALOG:-dialog} # DIALOG=gdialog is another choice
+
 DEFAULT_WIDTH=54
 DEFAULT_HEIGHT=18
 
@@ -33,9 +35,9 @@ dialog_msgbox() {
 	local SIZE_X=${3:-$DEFAULT_HEIGHT}
 	local SIZE_Y=${4:-$DEFAULT_WIDTH}
 
-	dialog --title "$TITLE" --msgbox "$PROMPT" $SIZE_X $SIZE_Y
+	$DIALOG --title "$TITLE" --msgbox "$PROMPT" $SIZE_X $SIZE_Y
 	local ans=$?
-	dialog --clear
+	$DIALOG --clear
 	return $ans
 }
 
@@ -83,10 +85,10 @@ dialog_checklist() {
 	done
 
 	# get the answer of dialog	
-	cat $TMPFILE | xargs dialog 2> $TMPFILE2
+	cat $TMPFILE | xargs $DIALOG 2> $TMPFILE2
 	local ans=$?
 	rm -f $TMPFILE
-	dialog --clear
+	$DIALOG --clear
 
 	# output the answer selected
 	cat $TMPFILE2 1>&2
@@ -138,10 +140,10 @@ dialog_menu() {
 		x=$(($x + 1))
 	done
 
-	cat $TMPFILE | xargs dialog 2> $TMPFILE2
+	cat $TMPFILE | xargs $DIALOG 2> $TMPFILE2
 	local ans=$?
 	rm -f $TMPFILE
-	dialog --clear
+	$DIALOG --clear
 
 	cat $TMPFILE2 1>&2
 	echo -e "" 1>&2
