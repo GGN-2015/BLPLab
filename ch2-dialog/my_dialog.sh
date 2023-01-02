@@ -11,8 +11,8 @@ DEFAULT_HEIGHT=18
 # with an <OK> button.
 #
 # usage: 
-#     dialog_msgbox "TITLE"
-#     dialog_mxgbox "TITLE" SIZE_X SIZE_Y
+#     dialog_msgbox "TITLE" "PROMPT"
+#     dialog_mxgbox "TITLE" "PROMPT" SIZE_X SIZE_Y
 #
 #     the default values are
 #         SIZE_X=$DEFAULT_HEIGHT
@@ -25,10 +25,11 @@ DEFAULT_HEIGHT=18
 #         value is 1 (false).
 dialog_msgbox() {
 	local TITLE=$1
-	local SIZE_X=${2:-$DEFAULT_HEIGHT}
-	local SIZE_Y=${3:-$DEFAULT_WIDTH}
+	local PROMPT=$2
+	local SIZE_X=${3:-$DEFAULT_HEIGHT}
+	local SIZE_Y=${4:-$DEFAULT_WIDTH}
 
-	dialog --msgbox "$TITLE" $SIZE_X $SIZE_Y
+	dialog --title "$TITLE" --msgbox "$PROMPT" $SIZE_X $SIZE_Y
 	local ans=$?
 	dialog --clear
 	return $ans
@@ -83,14 +84,66 @@ dialog_checklist() {
 
 	# output the answer selected
 	cat $TMPFILE2 1>&2
-	echo -e ""
+	echo -e "" 1>&2
 	rm -f $TMPFILE2
 
 	# return the value of state
 	return $ans
 }
 
-# dialog_msgbox "hello world!"
-# dialog_checklist "title" "prompt" 4 "one" "two" "three" "four"
-# echo ans=$?
+# dialog_menu show a menu and users can select from
+# one of the listed selections as their own choice,
+# with an OK and a Cancel button included.
+#
+# usage:
+#     dialog_menu "TITLE" "PROMPT" CHOICE_CNT ...
+#
+#     replace `...` with your own choices.
+#
+# return value:
+#     if OK button is pushed, return 0 (true)
+#         and the selected id will be output to stderr (2)
+#     if Cancel button is pushed, return 123 (false)
+#         and nothing will be output to stderr
+dialog_menu() {
+	local TITLE=$1
+	local PROMPT=$2
+	local CHOICE_CNT=$3
+
+	local SIZE_X=$DEFAULT_HEIGHT
+	local SIZE_Y=$DEFAULT_WIDTH
+	shift; shift; shift;
+
+	local TMPFILE=/tmp/mytmp_dialog_$$.tmp
+	local TMPFILE2=/tmp/mytmp_dialog_$$.out
+	rm -f $TMPFILE
+	touch $TMPFILE
+
+	echo -en "--title " "\"$TITLE\" " "--menu " "\"$PROMPT\" " >> $TMPFILE
+	echo -en "$SIZE_X $SIZE_Y $CHOICE_CNT " >> $TMPFILE
+
+	local x=1
+	while [ $x -le $CHOICE_CNT ]
+	do
+		echo -en "$x \"$1\" " >> $TMPFILE
+		shift
+		x=$(($x + 1))
+	done
+
+	cat $TMPFILE | xargs dialog 2> $TMPFILE2
+	local ans=$?
+	rm -f $TMPFILE
+	dialog --clear
+
+	cat $TMPFILE2 1>&2
+	echo -e "" 1>&2
+	rm -f $TMPFILE2
+	return $ans
+}
+
+# usage examples:
+#     dialog_msgbox "hello world!"
+#     dialog_checklist "title" "prompt" 4 "one" "two" "three" "four"
+#     dialog_menu "game menu" "select an option" 4 "new" "load" "settings" "quit"
+#     echo ans=$?
 
