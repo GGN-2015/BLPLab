@@ -1,7 +1,7 @@
 # ch2-csv
 
 in the chapter2 of book `BLP(4th)`, a CD message storage manager is
-provided by the author in order to pratise the shell programming skills
+provided by the author in order to pratice the shell programming skills
 of the readers. in this lab, we provides a series of shell scripts
 which facilitates the usage of CSV (Comma Seperated Values) data file,
 for a same purpose.
@@ -12,10 +12,10 @@ general definitions for CSV.
 
 ## descriptions for CSV and its parser
 1. a CSV file can be an empty file, but there should be no empty line
-in our CSV file. besides, the last bytes of a CSV file should be '\n',
-and '\n' should be the seperator of different lines (linux style). so
-if you try to change a CSV file with an editor program, make sure that
-this rule is obeyed, or our scripts may crash.
+in our CSV file except for the last line. besides, the last bytes of a 
+CSV file should be '\n',and '\n' should be the seperator of different 
+lines (linux style). so if you try to change a CSV file with an editor 
+program, make sure that this rule is obeyed, or our scripts may crash.
 2. if there are N commas in a line of data, it means that there are N+1
 data fields in this line. for example, if there is no comma on a certain
 line of data, it means that there is only one data field in this line.
