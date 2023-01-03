@@ -47,7 +47,16 @@ be output directly.
 - `csv_fix.sh` fix the fields count to a new value given in command
 line. if the original field count is less than the given value, new
 fields will be added, or else the last few fields will be deleted
-from the original line.
+from the original line. `csv_fix.sh` call `csv_col.sh` to implement
+its own function. in the next section we will focus on that 
+`csv_fix.sh` can only run properly under two circumstances:
+
+> 1. environment variable `$CSV_TOOLS_PATH` is set properly.
+> 2. current path of these scripts are added into variable `$PATH`.
+>
+- `csv_setpos.sh` change one pos in the csv file, you need to pass
+the row index and field index from command line and set a new value
+for this element in CSV file.
 
 all these scrpts input from stdin and output to stdout, this feature
 allows us to use pipe to filter a text CSV data in shell scripts.

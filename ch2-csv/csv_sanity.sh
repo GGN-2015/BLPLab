@@ -6,6 +6,18 @@
 # or else it exist with a non-zero value.
 #
 #
+script_name=$0
+show_help() {
+	echo -en "usage: $script_name\n"
+}
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]
+then
+    show_help
+    exit 0
+fi
+
+
 empty_cnt=0
 non_empty_cnt=0
 while read line

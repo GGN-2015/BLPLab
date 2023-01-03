@@ -9,6 +9,12 @@ show_help() {
 	echo -en "       $script_name FIELD_INDEX\n"
 }
 
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]
+then
+    show_help
+    exit 0
+fi
+
 case $# in
 	1)
 		FIELD_FROM=$1

@@ -9,6 +9,13 @@ show_help() {
 	echo "       $script_name ROW_INDEX "
 }
 
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]
+then
+    show_help
+    exit 0
+fi
+
+
 case $# in
 	1)
 		ROW_FROM=$1
