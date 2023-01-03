@@ -96,7 +96,7 @@ do
 	x=$((x + 1))
 done
 
-cat $tmpfile | "$CSV_SETROW_SH" $ROW_ID "$new_row"
+cat $tmpfile | "$CSV_SETROW_SH" $ROW_ID "$new_row" 2> /dev/null
 echo "$old_value" 1>&2
 
 rm -f $tmpfile

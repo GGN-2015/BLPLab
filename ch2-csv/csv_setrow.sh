@@ -47,6 +47,7 @@ do
 				echo -en "\n"
 				output_cnt=$((output_cnt + 1))
 			fi
+			echo "$line" 1>&2
 		fi
 		line_id=$((line_id + 1))
 	fi
