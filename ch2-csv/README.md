@@ -35,14 +35,38 @@ in total in a CSV file.
 CSV file, as well as correct this error to obey desciption-1.
 - `csv_row.sh` is used to get certain lines of data from a sanitized
 csv file. if a so called CSV file is not in sanity, the script will
-automatically sanitize it, all the following tools has this feature.
+automatically sanitize it in logic, all the following tools has this 
+feature.
 - `csv_col.sh` is used to get certain columns of data from a sanitized
 csv file. as is defined in desciption-4, if some line of data doesn't 
 has a certain index of data field, return an empty string as the data.
+- `csv_setrow.sh` change one row of a CSV file and keep all other row
+as the original value. if the row index for changing is not found in
+the CSV file, the operation will be ignored and the original file will
+be output directly.
+- `csv_fix.sh` fix the fields count to a new value given in command
+line. if the original field count is less than the given value, new
+fields will be added, or else the last few fields will be deleted
+from the original line.
 
 all these scrpts input from stdin and output to stdout, this feature
 allows us to use pipe to filter a text CSV data in shell scripts.
 
 ## usage of provided scripts
+before used, you should run command in script directory:
 
+```bash
+chmod +x *.sh
+export CSV_TOOLS_PATH=$(pwd)
+```
+
+these command will change all the `.sh` file in the current directory
+into mode of runnable file. if you want to use this tools in any
+position in your system, you can add current path into \$PATH by input
+command:
+
+```bash
+echo -en "export PATH=\$PATH:$(pwd)\n" >> $HOME/.bashrc
+source $HOME/.bashrc
+```
 
